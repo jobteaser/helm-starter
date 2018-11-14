@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: {{ template "<CHARTNAME>.fullname" . }}
   labels:
-    app: {{ template "<CHARTNAME>.name" . }}
-    chart: {{ template "<CHARTNAME>.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ include "<CHART>.name" . }}
+    helm.sh/chart: {{ include "<CHART>.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "<CHARTNAME>.name" . }}
-      release: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ include "<CHART>.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "<CHARTNAME>.name" . }}
-        release: {{ .Release.Name }}
+        app.kubernetes.io/name: {{ include "<CHART>.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -32,7 +32,7 @@ spec:
                 key: github-secret
           - name: TOPIC
             value: {{.Values.topicPrefix}}
-          imagePullPolicy: Always
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 8000

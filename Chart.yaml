@@ -1,15 +1,5 @@
----
-name: "__CHART__"
-## The version should track the upstream version, followed by the iteration. This follows the pattern established by the
-## Debian package version.
-## See https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
-version: "__VERSION__-1"
-description: "__DESCRIPTION__"
-keywords:
-  - "__CHART__"
-home: "__HOMEPAGE__"
-sources:
-  - "__SOURCE_URL__"
-maintainers:
-  - name: "__AUTHOR_NAME__"
-    email: "__AUTHOR_EMAIL__"
+apiVersion: v1
+appVersion: "1.0"
+description: A Helm chart for Kubernetes
+name: <CHART>
+version: 0.1.0
