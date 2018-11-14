@@ -18,6 +18,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "<CHART>.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        #log/format: json
     spec:
       containers:
         - name: {{ .Chart.Name }}
