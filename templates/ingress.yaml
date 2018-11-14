@@ -1,4 +1,4 @@
-{{- $fullName := include "__CHART__.fullname" . -}}
+{{- $fullName := include "<CHARTNAME>.fullname" . -}}
 {{- if .Values.ingress.enabled -}}
 {{- $ingressPath := .Values.ingress.path -}}
 apiVersion: extensions/v1beta1
@@ -6,8 +6,8 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "__CHART__.name" . }}
-    chart: {{ template "__CHART__.chart" . }}
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ template "<CHARTNAME>.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 {{- with .Values.ingress.annotations }}
