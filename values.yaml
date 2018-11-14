@@ -59,7 +59,7 @@ affinity: {}
 
 ## PostgreSQL
 ## More info : https://github.com/jobteaser/charts/tree/master/postgres
-#mysql:
+#postgres:
 #  enabled: false
 
 ## Elasticsearch
