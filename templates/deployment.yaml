@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: {{ template "<CHARTNAME>.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "<CHART>.name" . }}
-    helm.sh/chart: {{ include "<CHART>.chart" . }}
+    app.kubernetes.io/name: {{ include "<CHARTNAME>.name" . }}
+    helm.sh/chart: {{ include "<CHARTNAME>.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "<CHART>.name" . }}
+      app.kubernetes.io/name: {{ include "<CHARTNAME>.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "<CHART>.name" . }}
+        app.kubernetes.io/name: {{ include "<CHARTNAME>.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         #log/format: json
     spec:
