@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "<CHARTNAME>.fullname" . }}
@@ -23,17 +23,24 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image }}"
-          env:
-          - name: BOOTSTRAP_SERVERS
-            value: {{.Values.bootstrapServers}}
-          - name: GITHUB_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: {{.Values.secretName | default .Release.Name }}
-                key: github-secret
-          - name: TOPIC
-            value: {{.Values.topicPrefix}}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env: []
+## Inject environement variable from Helm values
+#          - name: BOOTSTRAP_SERVERS
+#            value: {{.Values.bootstrapServers}}
+
+## Inject single secret as environement variable
+#          - name: GITHUB_SECRET
+#            valueFrom:
+#              secretKeyRef:
+#                name: {{.Values.secretName | default .Release.Name }}
+#                key: github-secret
+
+## Inject all secrets as environement variables
+#          envFrom:
+#            - secretRef:
+#                name: {{.Values.secretName | default .Release.Name }}
+
+          imagePullPolicy: {{ .Values.pullPolicy }}
           ports:
             - name: http
               containerPort: 8000

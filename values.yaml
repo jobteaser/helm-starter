@@ -1,11 +1,11 @@
-# Default values for <CHART>.
+# Default values for <CHARTNAME>.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image: __CONTAINER_IMAGE_
-  pullPolicy: IfNotPresent
+pullPolicy: IfNotPresent
 
 nameOverride: ""
 fullnameOverride: ""
@@ -14,6 +14,10 @@ service:
   type: ClusterIP
   port: 80
 
+# ingress configuration. If the application has no ingress, you can delete:
+# - the following ingress section
+# - templates/ingress.yaml
+# - ingress bloc in NOTES.txt
 ingress:
   enabled: false
   annotations: {}
@@ -44,6 +48,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# If not provided, secretName equals the Helm release name. You cna fix the secretName (if you want to share it between
+# releases for instance)
+# secretName:
 
 # Components configuration
 
